@@ -26,9 +26,9 @@ def loadL2(addr):
     if set_no in l2_cache.keys():                # set exists in l2 cache
         if len(l2_cache[set_no])==l2_set_associativity:           #set full
             l2_cache[set_no].pop()                                #removed LRU block
-            l2_cache[set_no].insert(0,tag)
+            l2_cache[set_no].insert(0, tag)
         else:
-            l2_cache[set_no].insert(0,tag)
+            l2_cache[set_no].insert(0, tag)
     else:
         l2_cache[set_no]=list()
         l2_cache[set_no].append(tag)
@@ -41,9 +41,10 @@ def loadL3(addr):
     set_no = addr[47:58]
     tag = addr[0:47]
 
-    if set_no not in l3_cache.keys():
+    if set_no in l3_cache.keys():
         if len(l3_cache[set_no])==l3_set_associativity:               #l3 set full
-            
+            l3_cache[set_no].pop()
+            l3_cache[set_no].insert(0,tag)                             #added block
 
         else:
             l3_cache[set_no].insert(0,tag)
@@ -70,9 +71,9 @@ def lookL2(addr):
             l2_cache[set_no].insert(0, tag)              #updated LRU status
 
         else:
-            l2_miss = l2_miss + 1
+            l2_miss = l2_miss + 1                         #l2 miss
             lookL3(addr)
-    else:
+    else:                                                  #l2 miss
         l2_miss=l2_miss+1
         lookL3(addr)
 
@@ -87,22 +88,19 @@ def lookL3(addr):
     tag=addr[0:47]
 
     if set_no in l3_cache.keys():
-        if tag in l3_cache[set_no]:
+        if tag in l3_cache[set_no]:                           #hit in L3 but miss in L2
+            l3_cache[set_no].remove(tag)
+            l3_cache[set_no].insert(0, tag)                  #updated LRU status
+            loadL2(addr)
 
-
-
-        else:
+        else:                                                #miss in both l2 and l3
             l3_miss=l3_miss+1
             loadL3(addr)
-
-
-    else:                         #miss in both l2 and l3
+            loadL2(addr)
+    else:                                                    #miss in both l2 and l3
         l3_miss=l3_miss+1
-
-        #l3_cache[set_no]=list()
-        #l3_cache[set_no].append(tag)
         loadL3(addr)
-        loadL2(addr)                            #load in l2 cache
+        loadL2(addr)                                             #load in l2 cache
 
 
 
@@ -111,6 +109,7 @@ def lookL3(addr):
 
 
 def main():
+    global l2_miss, l3_miss
     f = open("output.txt", "r")
     adrressspace=64
     Lines=f.readlines()
@@ -123,6 +122,8 @@ def main():
             lookL2(addr)
 
 
+    print('L2 misses:'+str(l2_miss))
+    print('L3 misses:'+str(l3_miss))
     f.close()
 
 
