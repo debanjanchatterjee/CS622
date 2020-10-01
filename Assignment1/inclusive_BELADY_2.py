@@ -55,11 +55,11 @@ def loadL3(addr):
         l3_cache.remove(x)
         evictL2(addr)
         l3_cache.add(tag)
-        l3_cache_lru.insert(0, tag)
+        #l3_cache_lru.insert(0, tag)
 
     else:
         l3_cache.add(tag)
-        l3_cache_lru.insert(0, tag)
+        #l3_cache_lru.insert(0, tag)
 
 
 def next(arr, target):
@@ -93,17 +93,21 @@ def findBeladyReplacement(addr):
     if tag not in addr_seq.keys():
         print('logical error')
     max_dist=-1
-    for t in addr_seq.keys():
+    x=None
+    for t in l3_cache:
         i=next(addr_seq[t], i_count)
+        if i==-1:
+            return t
         current_dist=addr_seq[t][i]-i_count
         if current_dist>max_dist:
-
-
+            max_dist=current_dist
+            x=t
     return x
+
 
 def evictL2(addr):
     global l2_miss, l3_miss
-    global l2_cache, l3_cache, l3_cache_lru, l3_unique_blocks
+    global l2_cache, l3_cache, addr_seq, l3_unique_blocks
     global l2_set_associativity
 
     set_no = addr[48:58]
@@ -142,15 +146,14 @@ def lookL2(addr):
 
 def lookL3(addr):
     global l2_miss, l3_miss, l3_cold_miss, l3_capacity_miss, i_count
-    global l2_cache, l3_cache
+    global l2_cache, l3_cache, addr_seq
     global l2_set_associativity
 
     #set_no=addr[47:58]
     tag=addr[0:58]
 
     if tag in l3_cache:                                   #hit in l3 but miss in l2
-        l3_cache_lru.remove(tag)
-        l3_cache_lru.insert(0,tag)                          #maintaining lru order
+        dummy=None
 
     else:                                                   #miss in l3
         l3_miss=l3_miss+1
@@ -167,7 +170,7 @@ def lookL3(addr):
 
 
 def main():
-    global l2_miss, l3_miss, l3_cold_miss, l3_capacity_miss
+    global l2_miss, l3_miss, l3_cold_miss, l3_capacity_miss, i_count
     global l2_cache, l3_cache, addr_seq
     global l2_set_associativity
     f = open("output.txt", "r")
@@ -199,8 +202,9 @@ def main():
         if type!=0:
             lookL2(addr)
             i_count=i_count+1
+            print(i_count)
 
-
+    #print(i_count)
     print('L2 misses:'+str(l2_miss))
     print('L3 misses:'+str(l3_miss))
     print('L3 cold misses'+ str(l3_cold_miss))
