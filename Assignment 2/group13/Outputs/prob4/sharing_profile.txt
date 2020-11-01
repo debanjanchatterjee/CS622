@@ -1,0 +1,28 @@
+Executing Trace : prog1.out
+total mem blocks is 721413
+private: 435	two: 70	three: 1872	four: 32455	five: 143250	six: 244970	seven: 173832	eight: 124529
+threads total:  721413
+
+.......................................................
+
+Executing Trace : prog2.out
+total mem blocks is 66054
+private: 434	two: 8262	three: 16384	four: 40957	five: 4	six: 0	seven: 1	eight: 12
+threads total:  66054
+
+.......................................................
+
+Executing Trace : prog3.out
+total mem blocks is 66052
+private: 441	two: 63	three: 0	four: 0	five: 0	six: 0	seven: 1	eight: 65547
+threads total:  66052
+
+.......................................................
+
+Executing Trace : prog4.out
+total mem blocks is 66050
+private: 8621	two: 57409	three: 6	four: 0	five: 0	six: 0	seven: 1	eight: 13
+threads total:  66050
+
+.......................................................
+

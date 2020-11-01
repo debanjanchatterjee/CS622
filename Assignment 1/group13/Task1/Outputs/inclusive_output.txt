@@ -1,0 +1,36 @@
+Executing Trace : bzip
+ L2Miss:  5398166
+L3 Miss: 1446388
+time taken in seconds: 92.91646075248718
+.......................................................
+
+Executing Trace : gcc
+ L2Miss:  3036461
+L3 Miss: 1373402
+time taken in seconds: 78.96370148658752
+.......................................................
+
+Executing Trace : gromacs
+ L2Miss:  336851
+L3 Miss: 170531
+time taken in seconds: 16.07585597038269
+.......................................................
+
+Executing Trace : h264ref
+ L2Miss:  969678
+L3 Miss: 342146
+time taken in seconds: 15.934350490570068
+.......................................................
+
+Executing Trace : hmmer
+ L2Miss:  1743421
+L3 Miss: 391226
+time taken in seconds: 27.257365942001343
+.......................................................
+
+Executing Trace : sphinx3
+ L2Miss:  8820349
+L3 Miss: 8207362
+time taken in seconds: 127.15887975692749
+.......................................................
+

@@ -1,0 +1,36 @@
+Executing Trace : gromacs
+ L3 cold Miss:  107962
+L3 capacity  Miss: 35292
+time taken in seconds: 4049.137073993683
+.......................................................
+
+Executing Trace : h264ref
+ L3 cold Miss:  63703
+L3 capacity  Miss: 47902
+time taken in seconds: 3687.844232559204
+.......................................................
+
+Executing Trace : hmmer
+ L3 cold Miss:  75884
+L3 capacity  Miss: 77563
+time taken in seconds: 7985.104075670242
+.......................................................
+
+Executing Trace : bzip
+ L3 cold Miss:  119753
+L3 capacity  Miss: 417083
+time taken in seconds: 27000.671936214712
+.......................................................
+
+Executing Trace : gcc
+ L3 cold Miss:  773053
+L3 capacity  Miss: 166236
+time taken in seconds: 25200.900345266222
+.......................................................
+
+Executing Trace : sphinx3
+ L3 cold Miss:  122069
+L3 capacity  Miss: 2946511
+time taken in seconds: 35000.03514811522466
+.......................................................
+
